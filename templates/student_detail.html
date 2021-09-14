@@ -1,0 +1,68 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+    <script>
+
+
+$(document).ready(function() {
+    $('#{{ std }}').addClass("active");
+    $('#sdt').addClass("active");
+    $('#{{ std }} > a').css({"background-color":"#2e9ce0","color":"white"});
+
+});
+    </script>
+    <style>
+    #student{
+        height: 100%;
+        width: 100%;
+    }
+    #stud:hover{
+         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+    }
+#description{
+    background-color: white;
+    opacity: 0.5;
+}
+    #description:hover{
+        background-color: white;
+        opacity: 1;
+    }
+
+    </style>
+
+<div class="row">
+
+
+     <ul class="nav nav-tabs nav-justified visible-xs-block visible-sm-block visible-md-block visible-lg-block visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline visible-xs-inline-block visible-sm-inline-block visible-md-inline-block">
+        <li class="avn"  id="1"><a href="{% url 'standard' 1 %}">1ST STD</a></li>
+        <li class="avn" id="2" ><a href="{% url 'standard' 2 %}">2ND STD</a></li>
+        <li class="avn"  id="3"><a href="{% url 'standard' 3 %}">3RD STD</a></li>
+        <li class="avn"  id="4" ><a href="{% url 'standard' 4 %}">4TH STD</a></li>
+        <li class="avn"   id="5" ><a href="{% url 'standard' 5 %}">5TH STD</a></li>
+        <li class="avn"  id="6"><a href="{% url 'standard' 6 %}">6TH STD</a></li>
+        <li class="avn"  id="7"><a href="{% url 'standard' 7%}">7TH STD</a></li>
+        <li class="avn"  id="8"><a href="{% url 'standard' 8%}">8TH STD</a></li>
+        <li class="avn"  id="9"><a href="{% url 'standard' 9%}">9TH STD</a></li>
+        <li class="avn"  id="10"><a href="{% url 'standard' 10%}">10TH STD</a></li>
+    </ul>
+   <br>
+    <div class="row">
+         {% for stud in student %}
+        <div class="col-md-3">
+        <div class="thumbnail" id="stud">
+            <label>{{ stud.school_name | slice:":30" }}</label>
+       <img id="student" src="{{ stud.img.url }}">
+
+            <div class="caption carousel-caption" id="description">
+             {{ stud.fname }}&nbsp; {{ stud.lname }}<br>
+             Roll NO : {{ stud.rollno }}  Standard:{{ stud.std }}
+            </div>
+
+        </div>
+
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

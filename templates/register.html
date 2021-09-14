@@ -1,0 +1,65 @@
+
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+<script>
+  function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result,)
+
+
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script><style>
+#blah{
+    height: 100%;
+    width:100%;
+
+}
+table tr td{
+    padding: 5px;
+
+}
+#stud{
+    height: 210px;
+    width: 250px;
+}
+
+#stud:hover{
+     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+#loginform {font-size: 14px;
+    font-weight: 700;
+    color: #282828;
+    line-height: 22px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.14);
+}</style>
+<div class="row" >
+<div class="col-md-9" id="loginform">
+<form method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+<table>
+    {{ form.as_table }}
+    <tr><td> <input class="btn btn-success" type="submit" value="SIGN UP"></td><td>
+      <input class="btn btn-warning" type="reset" value="CLEAR"></td></tr></table>
+</form></div>
+    <div class="col-md-3">
+     <div class="thumbnail" id="stud">
+         <img id="blah" src="{% static 'blank_profile-500x420.png' %}" alt="your image" /></div>
+    </div><br></div><br>
+{% endblock %}

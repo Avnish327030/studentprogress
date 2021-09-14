@@ -1,0 +1,379 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+      <style>
+    #student{
+        height: 250px;
+        width: 100%;
+    }
+    #stud:hover{
+         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+    }
+
+#description{
+    background-color: white;
+    opacity: 0.8;
+
+}
+    #description:hover{
+        background-color: white;
+        opacity: 1;
+    }
+
+    </style>
+    <script>
+        $(document).ready(function(){
+    columnChart();
+
+    function columnChart(){
+        var item = $('.chart', '.column-chart').find('.item'),
+        itemWidth = 100 / item.length;
+
+        item.css('width', itemWidth + '%');
+
+        $('.column-chart').find('.item-progress').each(function(){
+            var itemProgress = $(this),
+            itemProgressHeight = $(this).parent().height() * ($(this).data('percent') / 100);
+            itemProgress.css({"height": itemProgressHeight,});
+
+        });
+    };
+});
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+}
+
+.column-chart {
+  position: relative;
+  z-index: 20;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 320px;
+  margin-top: 40px;
+  margin-left: -50%;
+}
+
+@media (min-width: 568px) {
+  .column-chart {
+    width: 80%;
+    margin-left: -40%;
+  }
+}
+
+@media (min-width: 768px) {
+  .column-chart {
+    width: 60%;
+    margin-left: -30%;
+  }
+}
+
+@media (min-width: 992px) {
+  .column-chart {
+    width: 40%;
+    margin-left: -20%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .column-chart {
+    width: 36%;
+    margin-left: -18%;
+  }
+}
+
+.column-chart:before,
+.column-chart:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: calc(100% + 30px);
+  height: 25%;
+  margin-left: -15px;
+  border-top: 1px dashed #b4b4b5;
+  border-bottom: 1px dashed #b4b4b5;
+}
+
+.column-chart:after {
+  top: 50%;
+}
+
+.column-chart > .legend {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+}
+
+.column-chart > .legend.legend-left {
+  left: 0;
+  width: 25px;
+  height: 75%;
+  margin-left: -55px;
+  border: 1px solid #b4b4b5;
+  border-right: none;
+}
+
+.column-chart > .legend.legend-left > .legend-title {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 65px;
+  height: 50px;
+  line-height: 50px;
+  margin-top: -25px;
+  margin-left: -60px;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.column-chart > .legend.legend-right {
+  right: 0;
+  width: 100px;
+  height: 100%;
+  margin-right: -115px;
+}
+
+.column-chart > .legend.legend-right > .item {
+  position: relative;
+  width: 100%;
+  height: 25%;
+}
+
+.column-chart > .legend.legend-right > .item > h4 {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: -20px;
+  font-size: 16px;
+  text-align: right;
+}
+
+.column-chart > .chart {
+  position: relative;
+  z-index: 20;
+  bottom: 0;
+  left: 50%;
+  width: 98%;
+  height: 100%;
+  margin-left: -49%;
+}
+
+.column-chart > .chart > .item {
+  position: relative;
+  float: left;
+  height: 100%;
+}
+
+.column-chart > .chart > .item:before {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: calc(100% + 15px);
+  border-right: 1px dashed #b4b4b5;
+}
+
+.column-chart > .chart > .item > .bar {
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+  width: 94%;
+    background-color: pink;
+
+  height: 100%;
+}
+
+.column-chart > .chart > .item > .bar > span.percent {
+  display: block;
+  position: absolute;
+  z-index: 25;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  line-height: 26px;
+  color: #fff;
+  background-color: #3e50b4;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.column-chart > .chart > .item > .bar > .item-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  color: #fff;
+  background-color: deeppink;
+}
+
+.column-chart > .chart > .item > .bar > .item-progress > .title {
+  position: absolute;
+  top: calc(0% - 13px);
+  left: 50%;
+  font-size: 14px;
+  text-align: center;
+    color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+}
+
+@media (min-width: 360px) {
+  .column-chart > .chart > .item > .bar > .item-progress > .title {
+    font-size: 14px;
+      color: blue;
+  }
+}
+
+@media (min-width: 480px) {
+  .column-chart > .chart > .item > .bar > .item-progress > .title {
+    font-size: 16px;
+  }
+}
+
+
+        </style>
+    <div class="row">
+        <label><a class="btn btn-default " href="{% url 'student_graph' std student_id%}">BACK</a>
+            <a class="btn btn-default " href="{% url 'rank' std student_id %}">RANK PROGRESS</a>
+            <a class="btn btn-default active" href="{% url 'rank_graph' std student_id %}">RANK GRAPH</a> </label>
+    <div class="row">
+
+    <div class="container" id="loginform">
+
+	<div class="row">
+        <div class="col-md-12">
+            <div class="text-center text-uppercase">
+                <h2>
+<label>
+ {% for a,b in report.items %}
+       {% if stud.rollno == b.roll_no %}
+           Your Rank is    {{ forloop.counter }}. Roll no{{ b.roll_no  }}:{{ b.fname }}
+          {% endif %}
+    {% endfor %}
+            </label> </h2>
+            </div>
+            <!-- //.text-center -->
+
+            <div class="column-chart">
+                <div class="legend legend-left hidden-xs">
+                    <h3 class="legend-title">ME</h3>
+                </div>
+                <!-- //.legend -->
+
+                <div class="legend legend-right hidden-xs">
+                    <div class="item">
+                        <h4>Superhero</h4>
+                    </div>
+                    <div class="item">
+                        <h4>Preety Good</h4>
+                    </div>
+                    <div class="item">
+                        <h4>Good</h4>
+                    </div>
+                    <div class="item">
+                        <h4>Newbie</h4>
+                    </div>
+
+                </div>
+
+                <div class="chart clearfix">
+                    {% for a,b in report.items %}
+                    <div class="item">
+                        <div class="bar">
+                            <span class="percent">{{ b.roll_no }}</span>
+
+                            <div class="item-progress " data-percent="{{ b.percentage }}" style="background-color: {{ b.color }}">
+                                <span class="title">{{ b.percentage }}{{ b.fname}}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+{% endfor %}
+
+                </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="container">
+    <div class="text-center">
+        <br>
+        <a href="{% url 'rank' std student_id %}" >RANK BY PROGRESS</a>
+    </div>
+    <!-- //.text-center -->
+</div>
+<!-- //.container -->
+
+    <div class="row">
+
+ <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">TOP 3 RANKERS </h3></div>
+
+         {% for a,b in report.items %}
+             {% if forloop.counter < 4 %}
+
+        <div class="col-md-4">
+        <div class="thumbnail" id="stud">
+           Your Rank is
+       {% if forloop.counter == 1 %}
+         1st.
+           {% elif forloop.counter == 2 %}
+           2nd
+           {% else %}
+           3rd
+    {% endif %} Percentage {{ b.percentage }} %
+    <img id="student" src="{{ b.img.url }}">
+
+            <div class="caption carousel-caption" id="description">
+             {{ b.fname }}&nbsp; {{ b.lname }}<br>
+             Roll NO : {{ b.roll_no }}  Standard:{{std }}
+            </div>
+
+        </div>
+        </div>
+             {% endif %}
+    {% endfor %}
+
+
+ </div></div>
+
+</div>
+{% endblock %}

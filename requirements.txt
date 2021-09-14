@@ -1,0 +1,4 @@
+Django
+passlib
+Pillow
+gunicorn

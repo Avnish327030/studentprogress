@@ -1,0 +1,77 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<script>
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+
+</script>
+    <script>
+
+$(document).ready(function() {
+    $('#{{ std }}').addClass("active");
+    $('#rpt').addClass("active");
+    $('#{{ std }} > a').css({"background-color":"#2e9ce0","color":"white"});
+});
+    </script>
+
+     <ul class="nav nav-tabs nav-justified visible-xs-block visible-sm-block visible-md-block visible-lg-block visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline visible-xs-inline-block visible-sm-inline-block visible-md-inline-block">
+        <li class="avn" id="1"><a href="{% url 'report' 1 %}">1ST STD</a></li>
+        <li class="avn" id="2"><a href="{% url 'report' 2 %}">2ND STD</a></li>
+        <li class="avn" id="3"><a href="{% url 'report' 3 %}">3RD STD</a></li>
+        <li class="avn" id="4"><a href="{% url 'report' 4 %}">4TH STD</a></li>
+        <li class="avn" id="5"><a href="{% url 'report' 5 %}">5TH STD</a></li>
+        <li class="avn" id="6"><a href="{% url 'report' 6 %}">6TH STD</a></li>
+        <li class="avn" id="7"> <a href="{% url 'report' 7%}">7TH STD</a></li>
+        <li class="avn" id="8"><a href="{% url 'report' 8%}">8TH STD</a></li>
+        <li class="avn" id="9"><a href="{% url 'report' 9%}">9TH STD</a></li>
+        <li class="avn" id="10"><a href="{% url 'report' 10%}">10TH STD</a></li>
+    </ul>
+   <br>
+{% if count is not 1 %}
+    <div class="row">
+<div class="anyclass">
+<table class="table table-striped table-responsive table-hover  ">
+<tr>
+    <th>
+     ROLL NO
+</th>
+    {% if hint is not None %}
+        <th>STD</th>
+
+        {% endif %}
+    <th>
+        FIRST NAME
+    </th>
+    <th>LAST NAME
+    </th>
+    <th>OBTAIN MARK</th>
+    <th>TOTAL MARK</th>
+    <th> PERCENTAGE</th>
+
+</tr>
+    {% for a,b in report.items %}
+        <tr
+            {% if hint is  None %}class="clickable-row" data-href="{% url 'detail_report' std b.student_id %}" {% endif %}>
+    <td>
+         {{ b.roll_no }}
+    </td>
+        {% if hint is  not None %}
+            <td>     {{ b.std }}</td>
+        {% endif %}
+            <td>       {{ b.fname }}</td>
+            <td> {{ b.lname }}</td>
+            <td>  {{ b.obtain_mark }}</td>
+            <td> {{ b.total_mark }}</td>
+            <td> {{ b.percentage }} {% if b.percentage is not None%}%{% endif %}</td></tr>
+    {% endfor %}
+</table></div>
+</div>
+    {% endif %}
+{% endblock %}
+

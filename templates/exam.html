@@ -1,0 +1,56 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+    <style>
+    table tr td {
+        padding: 10px;
+    align-items: center ;
+    }
+    </style>
+    <div class="row">
+    <div class="col-md-7 ">
+    <div class="anyclass">
+     <table class="table table-hover table-striped ">
+         <tr>
+             <th>EXAM DATE</th>
+             <th>EXAM DAY</th>
+             <th>STANDARD</th>
+             <th>SUBJECT</th>
+             <th>CHAPTER</th>
+             <th>TOTAL MARKS</th>
+         </tr>
+
+         {% for e in exam %}
+     <tr>
+         <td>{{e.exam_date|date:"d F Y"}}</td><td>{{ e.exam_date|date:"l" }}</td>
+     <td>{{e.std }}</td>
+     <td>{{e.subject}}</td>
+     <td>{{e.chapter}}</td>
+     <td>{{e.total_mark}}</td>
+     </tr>
+         {% endfor %}
+     </table>
+
+    </div></div>
+    <div class="col-md-5">
+         <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">ADD EXAM DETAIL</h3></div><div class="panel-body">
+<form method="post">
+    {% csrf_token %}
+    <table>
+
+    {{ form }}
+        <tr>
+            <td>
+                <input class="btn btn-success" type="submit" value="ADD EXAM DETAIL">
+            </td>
+            <td>
+                <input class="btn btn-success" type="reset" value="CLEAR">
+            </td>
+        </tr></table>
+    </table>
+</form></div></div></div></div>
+{% endblock %}
+
+

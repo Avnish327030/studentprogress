@@ -1,0 +1,122 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+       <style>
+    #student{
+        height: 100%;
+        width: 100%;
+    }
+    #stud:hover{
+         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+    }
+#description{
+    background-color: white;
+    opacity: 0.5;
+}
+    #description:hover{
+        background-color: white;
+        opacity: 1;
+    }
+
+    </style>
+<style>
+.progress{
+    height: 6px;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 70px;
+    overflow: visible;
+}
+.progress .progress-bar{
+    box-shadow: none;
+    border-radius: 5px;
+    position: relative;
+    animation: animate-positive 2s;
+}
+.progress .progress-title{
+    padding: 3px 10px;
+    margin: 0;
+    min-width: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #282828;
+    line-height: 22px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    background: #fff;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.14);
+    position: absolute;
+    top: -10px;
+    left: 0;
+}
+.progress .progress-value{
+    width: 50px;
+    height: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 25px;
+    border-radius: 4px;
+    position: absolute;
+    top: -40px;
+    right: 0;
+}
+.progress.pink .progress-bar,
+.progress.pink .progress-value{ background: #ff007f; }
+.progress.green .progress-bar,
+.progress.green .progress-value{ background: #73cd21; }
+.progress.blue .progress-bar,
+.progress.blue .progress-value{ background: #2e9ce0; }
+.progress.yellow .progress-bar,
+.progress.yellow .progress-value{ background: #eea921; }
+@-webkit-keyframes animate-positive{
+    0%{ width: 0; }
+}
+@keyframes animate-positive{
+    0%{ width: 0; }
+}
+</style>
+    <div class="row">
+<div class="col-md-12">
+
+    <label><a class="btn btn-default active" href="{% url 'detail_report' std student_id %}">PROGRESS BAR</a> <a class="btn btn-default" href="{% url 'student_graph' std student_id%}">GRAPH</a> <a class="btn btn-default" href="{% url 'rank' std student_id %}">Check out My Rank</a> </label>
+</div>
+</div>
+<div class="row">
+<div class="container">
+    <div class="row">
+    <div class="col-md-4">
+
+        <div class="thumbnail" id="stud">
+            <label>{{ stud.school_name | slice:":30" }}</label>
+       <img id="student" src="{{ stud.img.url }}">
+
+            <div class="caption carousel-caption" id="description">
+             {{ stud.fname }}&nbsp; {{ stud.lname }}<br>
+             Roll NO : {{ stud.rollno }}  Standard:{{ stud.std }}
+            </div>
+
+</div>
+
+    </div>
+        <div class="col-md-6 col-lg-offset-1" id="loginform">
+            {% for a,b in report.items %}
+            <div class="progress {{ b.color }}">
+                <div class="progress-bar" style="width: {% if b.percentage is not None %} {{ b.percentage }}%{% else %}0%{% endif %};">
+                    <h3 class="progress-title">{{ b.subject }}</h3>
+                    <div class="progress-value"> {% if b.percentage is not None %} {{ b.percentage }}% {% else %}AB{% endif %}</div>
+                </div>
+            </div>
+{% endfor %}
+
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+

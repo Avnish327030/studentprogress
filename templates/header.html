@@ -1,0 +1,109 @@
+{% load static %}
+{% url 'home' as home %}
+{% url 'login' as login %}
+{% url 'logout' as logout %}
+{% url 'register' as register %}
+{% url 'student_detail' as sd %}
+{% url 'exam' as e %}
+{% url 'add_student' as ast %}
+{% url 'entermark' 0 as em %}
+{% url 'report' 0 as rp %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{%  static 'assets/css/styles.css'%}">
+
+<script type="text/javascript" charset="utf-8">
+</script>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand navbar-link" href="{% url 'home' %}" ><span style="color: #2aabd2;font-size: 40px">iNEURON</span></a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation" {% ifequal request.path home %}class="active" {% endifequal %} ><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>&nbsp;HOME</a></li>
+                    <li role="presentation" > <a href="#" >ABOUT US</a></li>
+                    <li role="presentation"><a href="#" >CONTACT US</a></li>
+                    <li role="presentation"><a href="#">EVENTS</a></li>
+
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                      {%    if request.session.name is None %}
+                <li {% ifequal request.path register %}class="active" {% endifequal %} ><a href="{% url 'register' %}" >REGISTER</a></li>
+               <li {% ifequal request.path login %}class="active" {% endifequal %} ><a href="{% url 'login' %}"> <span class="glyphicon glyphicon-log-in"></span> LOGIN</a>
+
+
+               </li>
+        <li {% ifequal request.path admin %}class="active" {% endifequal %}  ><a href={% url 'admin:index' %}><span class="glyphicon glyphicon-king"></span>&nbsp;ADMIN</a></li>
+       {% else %}
+                <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><span class="glyphicon glyphicon-user"></span> {{ request.session.name }} <span class="caret"></span></a>
+               <ul class="dropdown-menu" >
+                   <li class="drop {% ifequal request.path logout %}active{% endifequal %}" ><a href="{% url 'logout' %}" type="element"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
+
+               </ul> </li>
+           {% endif %}
+                </ul>
+
+
+            </div>
+        </div>
+    </nav>
+ <script src="{%  static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+    {% if request.session.name is not None %}
+        <div class="col-md-2" >
+                <ul class="nav nav-pills brand-pills nav-stacked" style="background-color: whitesmoke;text-align: center;" >
+                    <li role="presentation" id="sdt" {% ifequal request.path sd %}class="active" {% endifequal %}  ><a href="{% url 'student_detail' %}" >STUDENT DETAILS</a></li>
+                    <li role="presentation" {% ifequal request.path ast %}class="active" {% endifequal %} ><a href="{% url 'add_student' %}">MANAGE STUDENTS</a></li>
+                    <li role="presentation" {% ifequal request.path e %}class="active" {% endifequal %}  ><a href="{% url 'exam' %}" >EXAM DETAILS</a></li>
+                    <li role="presentation" id="ent" {% ifequal request.path em%}class="active" {% endifequal %} ><a href="{% url 'entermark' 0 %}">UPDATE  MARKS</a></li>
+                <li role="presentation" id="rpt" {% ifequal request.path  rp %}class="active" {% endifequal %} ><a href="{% url 'report' 0 %}">STUDENT REPORT</a></li>
+
+                </ul>
+
+        </div>
+        {% else %}
+
+        <div class="col-md-4">
+        <img src="{% static 'home.page.jpg' %}" height="100%" width="100%">
+        </div>
+    {% endif %}
+
+
+    <div class="col-lg-{% if request.session.name is not None %}10{% else %}5{% endif %}">
+     {% if request.session.name is not None %}
+      {% for m in messages %}
+      <div class="row"><p id="msg" align="center">{{ m }}</p></div>
+    {% endfor %}
+{% endif %}
+{% block content %}
+{% endblock %}
+
+    </div></div>
+
+</div>
+</body>
+<div class="row">
+<div class="container-fluid" style="background-color: whitesmoke; ">
+<div class="modal-footer">
+    <p align="center"><span style="color: #2aabd2;font-size: 20px">Avnish Yadav</span> © copyright | contact us | anishyadav7045075175@gmail.com</p>
+</div>
+</div></div>
+</html>
+
+

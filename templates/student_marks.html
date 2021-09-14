@@ -1,0 +1,104 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<script>
+
+
+$(document).ready(function() {
+    $('#{{ std }}').addClass("active");
+    $('#ent').addClass("active");
+    $('#{{ std }} > a').css({"background-color":"#2e9ce0","color":"white"});
+});
+    </script>
+    <style>
+.msg{
+    width: 100%;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    font-family: "Javanese Text";
+    font-size: 16px;
+    background-color: whitesmoke;
+    box-shadow: 10px 12px 16px 0 rgba(0.24,0,0,0.24),10px 17px 50px 0 rgba(0.24,0,0,0.19);
+}
+
+option{
+     text-align: center;
+    font-family: Helvetica;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    color: purple;
+    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+    text-shadow: 2px 2px skyblue;
+}
+
+  #student{
+        height: 100%;
+        width: 100%;
+    }
+
+    </style>{% if count is not 0 %}
+    <form action="{% url 'entermark' std %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="no_of_stud" value="{{ no_of_stud }}">{% endif %}
+  <div class="row">
+<div class="container-fluid">
+    <div class="col-lg-offset-1 col-md-10 ">
+    {% if count is not 0 %}
+
+
+    <select class="msg" name="exam_id" required="true">
+        <option value="">SELECT EXAM FOR WHICH YOU WANT TO INSERT MARKS OF YOUR STUDENT</option>
+        {% for e in exam %}
+        <option value="{{ e.exam_id }}">
+            {{ e }}
+        </option>
+        {% endfor %}
+    </select>
+    {% else %}
+        <center class="msg">No exam has been done </center>
+    {% endif %}
+    </div>
+</div></div>
+    <br>
+<div class="row">
+
+
+     <ul class="nav nav-tabs nav-justified visible-xs-block visible-sm-block visible-md-block visible-lg-block visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline visible-xs-inline-block visible-sm-inline-block visible-md-inline-block">
+        <li class="avn" id="1"><a href="{% url 'entermark' 1 %}">1ST STD</a></li>
+        <li class="avn" id="2"><a href="{% url 'entermark' 2 %}">2ND STD</a></li>
+        <li class="avn" id="3"><a href="{% url 'entermark' 3 %}">3RD STD</a></li>
+        <li class="avn" id="4"><a href="{% url 'entermark' 4 %}">4TH STD</a></li>
+        <li class="avn" id="5"> <a href="{% url 'entermark' 5 %}">5TH STD</a></li>
+        <li class="avn" id="6"><a href="{% url 'entermark' 6 %}">6TH STD</a></li>
+        <li class="avn" id="7"><a href="{% url 'entermark' 7%}">7TH STD</a></li>
+        <li class="avn" id="8"><a href="{% url 'entermark' 8%}">8TH STD</a></li>
+        <li class="avn" id="9"> <a href="{% url 'entermark' 9%}">9TH STD</a></li>
+        <li class="avn" id="10"><a href="{% url 'entermark' 10%}">10TH STD</a></li>
+    </ul>
+   <br>
+
+    <div class="row">
+    <div class="col-md-12">
+    <div class="container-fluid anyclass">
+
+         {% for stud in student %}
+        <div class="col-md-3">
+        <div class="thumbnail " id="stud">
+            <label>{{ stud.school_name | slice:":30" }}</label>
+       <img id="student" src="{{ stud.img.url }}">
+            <p align="center">Roll no:{{ stud.rollno }}   {{ stud.fname }}</p>
+{% if count is not 0 %}
+            <input  type="number" min="0"  max="30" name="m{{ forloop.counter }}"  placeholder="ENTER MARKS" class="form-control" required="true" >
+<input type="hidden" name="stud_id{{ forloop.counter }}" value="{{ stud.student_id }}">
+       {% endif %} </div></div>
+    {% endfor %}
+    </div></div></div><br>
+{% if count is not 0   %}
+    <p align="center"><input  type="submit" value="UPDATE MARKS" class="btn btn-success"></p>
+{% endif %}
+</div>
+    {% if count is not 0 %}</form>{% endif %}
+{% endblock %}
+
